@@ -9,19 +9,26 @@
   <div id="todo-list"></div>
   <script>
     const data = [
-      {
-        todo: 'JS 공부하기'
+      { 
+        text: '코딩하기',
+        isCompleted: true
       },
       {
-        todo: 'JS 복습하기'
+        text: '집안 청소하기',
+        isCompleted: false
       }
     ]
   
   function TodoList(data) {
+    if(!data) {
+      throw new Error('data is empty');
+    }
     this.todoList = data;
     
     this.render = function() {
-      document.querySelector('#todo-list').innerHTML = this.todoList.map(({ todo }) => `<div>${todo}</div>`);
+      document.querySelector('#todo-list').innerHTML = this.todoList.map(({ todo }) => (
+        todo.isCompleted ? `<div>${todo}</div>` : `<strike>${todo}</strike>`
+      ));
     };
   }
 
