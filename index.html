@@ -23,11 +23,17 @@
     if(!data) {
       throw new Error('data is empty');
     }
+
     this.todoList = data;
-    
-    this.render = function() {
-      document.querySelector('#todo-list').innerHTML = this.todoList.map(({ todo }) => (
-        todo.isCompleted ? `<div>${todo}</div>` : `<strike>${todo}</strike>`
+
+    this.setState = function (nextData) {
+      this.todoList = nextData;
+      this.render();
+    }
+
+    this.render = function(data) {
+      document.querySelector('#todo-list').innerHTML = this.todoList.map((todo) => (
+        todo.isCompleted ? `<div>${todo.text}</div>` : `<strike>${todo.text}</strike>`
       ));
     };
   }
